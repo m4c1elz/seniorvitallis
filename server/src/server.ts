@@ -11,9 +11,14 @@ app.get("/", async (_req, res) => {
         orderBy: {
             nome: "asc"
         },
-        include: {
-            avaliacao: true,
-            _count: true
+        select: {
+            idProfissional: true,
+            nome: true,
+            email: true,
+            descricao: true,
+            telefoneCelular: true,
+            disponibilidade: true,
+            especialidade: true
         }
     })
 

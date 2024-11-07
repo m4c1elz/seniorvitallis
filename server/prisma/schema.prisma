@@ -37,15 +37,15 @@ model Chat {
 }
 
 model Contratacao {
-  idContratacao       Int                  @id @default(autoincrement()) @map("id_contratacao")
-  fkUsuarioComumId    Int                  @map("fk_usuario_comum_id")
-  fkProfissionalId    Int                  @map("fk_profissional_id")
-  precoContratacao    Decimal              @map("preco_contratacao") @db.Decimal(10, 2)
-  dataContratacao     DateTime             @map("data_contratacao") @db.Date
-  prazoContratacao    Int                  @map("prazo_contratacao")
-  statusContratacao   Status?              @map("status_contratacao")
-  usuarioComum        UsuarioComum?        @relation(fields: [fkUsuarioComumId], references: [idUsuarioComum], onDelete: NoAction, onUpdate: NoAction, map: "contratacao_ibfk_1")
-  usuarioProfissional UsuarioProfissional? @relation(fields: [fkProfissionalId], references: [idProfissional], onDelete: NoAction, onUpdate: NoAction, map: "contratacao_ibfk_2")
+  idContratacao       Int                 @id @default(autoincrement()) @map("id_contratacao")
+  fkUsuarioComumId    Int                 @map("fk_usuario_comum_id")
+  fkProfissionalId    Int                 @map("fk_profissional_id")
+  precoContratacao    Decimal             @map("preco_contratacao") @db.Decimal(10, 2)
+  dataContratacao     DateTime            @map("data_contratacao") @db.Date
+  prazoContratacao    DateTime            @map("prazo_contratacao") @db.Timestamp()
+  statusContratacao   Status              @map("status_contratacao")
+  usuarioComum        UsuarioComum        @relation(fields: [fkUsuarioComumId], references: [idUsuarioComum], onDelete: NoAction, onUpdate: NoAction, map: "contratacao_ibfk_1")
+  usuarioProfissional UsuarioProfissional @relation(fields: [fkProfissionalId], references: [idProfissional], onDelete: NoAction, onUpdate: NoAction, map: "contratacao_ibfk_2")
 
   @@index([fkProfissionalId], map: "fk_profissional_id")
   @@index([fkUsuarioComumId], map: "fk_usuario_comum_id")
