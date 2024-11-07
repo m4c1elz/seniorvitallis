@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Avaliacao {
+  idAvaliacao         Int                  @id @default(autoincrement()) @map("id_avaliacao")
+  usuarioComumId      Int                  @map("fk_usuario_comum_id")
+  profissionalId      Int                  @map("fk_profissional_id")
+  comentario          String?              @map("comentario") @db.VarChar(255)
+  nota                Int                  @map("nota")
+  dataAvaliacao       DateTime             @map("data_avaliacao") @db.Date
+  usuarioComum        UsuarioComum?        @relation(fields: [usuarioComumId], references: [idUsuarioComum], onDelete: NoAction, onUpdate: NoAction, map: "avaliacao_ibfk_1")
+  usuarioProfissional UsuarioProfissional? @relation(fields: [profissionalId], references: [idProfissional], onDelete: NoAction, onUpdate: NoAction, map: "avaliacao_ibfk_2")
+
+  @@index([profissionalId], map: "fk_profissional_id")
+  @@index([usuarioComumId], map: "fk_usuario_comum_id")
+  @@map("avaliacao")
+}
+
+model Chat {
+  idChat              Int                 @id @default(autoincrement()) @map("id_chat")
+  usuarioComumId      Int                 @map("usuario_comum_id")
+  fkProfissionalId    Int                 @map("fk_profissional_id")
+  dataInicioChat      DateTime            @map("data_inicio_chat") @db.Date
+  usuarioComum        UsuarioComum        @relation(fields: [usuarioComumId], references: [idUsuarioComum], onDelete: NoAction, onUpdate: NoAction, map: "chat_ibfk_1")
+  usuarioProfissional UsuarioProfissional @relation(fields: [fkProfissionalId], references: [idProfissional], onDelete: NoAction, onUpdate: NoAction, map: "chat_ibfk_2")
+  mensagem            Mensagem[]
+
+  @@index([fkProfissionalId], map: "fk_profissional_id")
+  @@index([usuarioComumId], map: "fk_usuario_comum_id")
+  @@map("chat")
+}
+
+model Contratacao {
+  idContratacao       Int                  @id @default(autoincrement()) @map("id_contratacao")
+  fkUsuarioComumId    Int                  @map("fk_usuario_comum_id")
+  fkProfissionalId    Int                  @map("fk_profissional_id")
+  precoContratacao    Decimal              @map("preco_contratacao") @db.Decimal(10, 2)
+  dataContratacao     DateTime             @map("data_contratacao") @db.Date
+  prazoContratacao    Int                  @map("prazo_contratacao")
+  statusContratacao   Status?              @map("status_contratacao")
+  usuarioComum        UsuarioComum?        @relation(fields: [fkUsuarioComumId], references: [idUsuarioComum], onDelete: NoAction, onUpdate: NoAction, map: "contratacao_ibfk_1")
+  usuarioProfissional UsuarioProfissional? @relation(fields: [fkProfissionalId], references: [idProfissional], onDelete: NoAction, onUpdate: NoAction, map: "contratacao_ibfk_2")
+
+  @@index([fkProfissionalId], map: "fk_profissional_id")
+  @@index([fkUsuarioComumId], map: "fk_usuario_comum_id")
+  @@map("contratacao")
+}
+
+model Denuncia {
+  idDenuncia          Int                 @id @default(autoincrement()) @map("id_denuncia")
+  fkUsuarioComumId    Int                 @map("fk_usuario_comum_id")
+  fkProfissionalId    Int                 @map("fk_profissional_id")
+  comentario          String              @map("comentario") @db.VarChar(255)
+  dataDenuncia        DateTime            @map("data_denuncia") @db.Date
+  usuarioComum        UsuarioComum        @relation(fields: [fkUsuarioComumId], references: [idUsuarioComum], onDelete: NoAction, onUpdate: NoAction, map: "denuncia_ibfk_1")
+  usuarioProfissional UsuarioProfissional @relation(fields: [fkProfissionalId], references: [idProfissional], onDelete: NoAction, onUpdate: NoAction, map: "denuncia_ibfk_2")
+
+  @@index([fkProfissionalId], map: "fk_profissional_id")
+  @@index([fkUsuarioComumId], map: "fk_usuario_comum_id")
+  @@map("denuncia")
+}
+
+model Mensagem {
+  idMensagem          Int                 @id @default(autoincrement()) @map("id_mensagem")
+  fkChatId            Int                 @map("fk_chat_id")
+  fkUsuarioComumId    Int                 @map("fk_usuario_comum_id")
+  fkProfissionalId    Int                 @map("fk_profissional_id")
+  conteudo            String              @map("conteudo") @db.Text
+  dataEnvio           DateTime            @map("data_envio") @db.Timestamp(0)
+  chat                Chat                @relation(fields: [fkChatId], references: [idChat], onDelete: Cascade, onUpdate: NoAction, map: "mensagem_ibfk_1")
+  usuarioComum        UsuarioComum        @relation(fields: [fkUsuarioComumId], references: [idUsuarioComum], onUpdate: NoAction, map: "mensagem_ibfk_2")
+  usuarioProfissional UsuarioProfissional @relation(fields: [fkProfissionalId], references: [idProfissional], onUpdate: NoAction, map: "mensagem_ibfk_3")
+
+  @@index([fkChatId], map: "fk_chat_id")
+  @@index([fkProfissionalId], map: "fk_profissional_id")
+  @@index([fkUsuarioComumId], map: "fk_usuario_comum_id")
+  @@map("mensagem")
+}
+
+model UsuarioComum {
+  idUsuarioComum  Int           @id @default(autoincrement()) @map("id_usuario_comum")
+  nome            String        @map("nome") @db.VarChar(255)
+  email           String        @unique(map: "email") @map("email") @db.VarChar(255)
+  telefoneCelular String?       @map("telefone_celular") @db.VarChar(15)
+  endereco        String        @map("endereco") @db.VarChar(255)
+  cpf             String        @unique(map: "cpf") @map("cpf") @db.VarChar(14)
+  senhaUsuario    String        @map("senha_usuario") @db.VarChar(255)
+  avaliacao       Avaliacao[]
+  chat            Chat[]
+  contratacao     Contratacao[]
+  denuncia        Denuncia[]
+  mensagem        Mensagem[]
+
+  @@map("usuario_comum")
+}
+
+model UsuarioProfissional {
+  idProfissional  Int             @id @default(autoincrement()) @map("id_profissional")
+  nome            String          @map("nome") @db.VarChar(255)
+  email           String          @unique(map: "email") @map("email") @db.VarChar(255)
+  telefoneCelular String          @map("telefone_celular") @db.VarChar(15)
+  endereco        String          @map("endereco") @db.VarChar(255)
+  cpf             String          @unique(map: "cpf") @map("cpf") @db.VarChar(14)
+  cnpj            String          @map("cnpj") @db.VarChar(14)
+  especialidade   String          @map("especialidade") @db.VarChar(255)
+  disponibilidade Disponibilidade @map("disponibilidade")
+  descricao       String          @map("descricao") @db.VarChar(255)
+  senhaUsuario    String          @map("senha_usuario") @db.VarChar(255)
+  avaliacao       Avaliacao[]
+  chat            Chat[]
+  contratacao     Contratacao[]
+  denuncia        Denuncia[]
+  mensagem        Mensagem[]
+
+  @@map("usuario_profissional")
+}
+
+enum Disponibilidade {
+  disponivel
+  indisponivel
+
+  @@map("usuario_profissional_disponibilidade")
+}
+
+enum Status {
+  pendente
+  concluida
+  cancelada
+}
