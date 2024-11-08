@@ -7,7 +7,9 @@ import { UserPayload } from "@/types/user-payload"
 
 const loginSchema = z.object({
     email: z.string().email("E-mail inválido."),
-    password: z.string().min(8, "Senha não pode ser menor que 8 caracteres"),
+    password: z.string({
+        message: "Senha inválida.",
+    }),
 })
 
 export async function login(req: Request, res: Response) {

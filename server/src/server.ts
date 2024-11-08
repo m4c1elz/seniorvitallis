@@ -1,7 +1,9 @@
+import "express-async-errors"
 import express from "express"
-import { commonUserRoutes } from "./routes/common-user-routes"
-import { authRoutes } from "./routes/auth-routes"
 import cookieParser from "cookie-parser"
+import { commonUserRoutes } from "@/routes/common-user-routes"
+import { authRoutes } from "@/routes/auth-routes"
+import { errorHandler } from "@/middlewares/error-handler"
 
 const app = express()
 
@@ -13,6 +15,7 @@ app.use(cookieParser())
 
 app.use(authRoutes)
 app.use(commonUserRoutes)
+app.use(errorHandler)
 
 app.listen(port, () => {
     console.log(`Listening on ${port}`)
