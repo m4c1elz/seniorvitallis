@@ -1,9 +1,10 @@
 import { prisma } from "@/lib/prisma"
+import { verifyToken } from "@/middlewares/verify-token"
 import { Router } from "express"
 
 const router = Router()
 
-router.get("/professionals", async (req, res) => {
+router.get("/professionals", verifyToken, async (req, res) => {
     const professionals = await prisma.usuarioProfissional.findMany({
         orderBy: {
             nome: "asc",

@@ -3,6 +3,7 @@ import { Request, Response } from "express"
 import { env } from "@/env"
 import jwt from "jsonwebtoken"
 import { z } from "zod"
+import { UserPayload } from "@/types/user-payload"
 
 const loginSchema = z.object({
     email: z.string().email("E-mail inválido."),
@@ -38,7 +39,7 @@ export async function login(req: Request, res: Response) {
         id: requestedUser.idUsuarioComum,
         usuario: requestedUser.nome,
         email: requestedUser.email,
-    }
+    } satisfies UserPayload
 
     const token = jwt.sign(jwtPayload, env.JWT_SECRET, {
         expiresIn: "5m",
@@ -49,7 +50,7 @@ export async function login(req: Request, res: Response) {
     })
 
     res.cookie("_id", token, {
-        maxAge: 300,
+        maxAge: 300000,
         httpOnly: true,
     })
 
