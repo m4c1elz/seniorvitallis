@@ -4,20 +4,20 @@ import * as commonUserController from "@/controllers/common-user"
 
 const router = Router()
 
+router.use("*", verifyToken)
+
 router.get(
     "/common-user/professionals",
-    verifyToken,
     commonUserController.getAvailableProfessionals
 )
 router.get(
     "/common-user/professionals/history",
-    verifyToken,
     commonUserController.getHirings
 )
 router.get(
     "/common-user/professionals/:id",
-    verifyToken,
     commonUserController.getProfessionalById
 )
+router.get("/common-user/messages", commonUserController.getContactList)
 
 export const commonUserRoutes = router
