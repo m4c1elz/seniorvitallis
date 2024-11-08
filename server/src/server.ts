@@ -1,5 +1,5 @@
 import express from "express"
-import { professionalsRoutes } from "./routes/professional-routes"
+import { commonUserRoutes } from "./routes/common-user-routes"
 import { authRoutes } from "./routes/auth-routes"
 import cookieParser from "cookie-parser"
 
@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use(authRoutes)
-app.use(professionalsRoutes)
+app.use(commonUserRoutes)
 
 app.listen(port, () => {
     console.log(`Listening on ${port}`)
