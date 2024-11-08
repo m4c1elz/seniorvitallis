@@ -14,5 +14,10 @@ router.get(
     verifyToken,
     commonUserController.getHirings
 )
+router.get(
+    "/common-user/professionals/:id",
+    verifyToken,
+    commonUserController.getProfessionalById
+)
 
 export const commonUserRoutes = router
