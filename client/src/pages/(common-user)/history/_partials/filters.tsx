@@ -6,13 +6,20 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { useFilters } from "./filters.hooks"
 
 export function HistoryFilters() {
+    const { selectedStatus, setSelectedStatus, setSearch, search } =
+        useFilters()
+
     return (
         <form className="flex flex-col space-y-2">
             <h2 className="text-xl">Filtrar por</h2>
             <div className="flex gap-2 items-center">
-                <Select>
+                <Select
+                    defaultValue={selectedStatus}
+                    onValueChange={value => setSelectedStatus(value)}
+                >
                     <SelectTrigger className="w-[150px]">
                         <SelectValue placeholder="Todos" />
                     </SelectTrigger>
@@ -27,6 +34,8 @@ export function HistoryFilters() {
                     type="text"
                     placeholder="Pesquise um profissional..."
                     className="w-[500px]"
+                    defaultValue={search}
+                    onChange={e => setSearch(e.target.value)}
                 />
             </div>
         </form>
