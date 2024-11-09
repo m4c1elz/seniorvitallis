@@ -31,7 +31,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         queryFn: async () => {
             const refreshResponse = await api.get("/auth/refresh")
             if (refreshResponse.status !== 200) {
-                return
+                throw new Error()
             }
             const response = await api.get("/common-user/me")
             const user = response.data as UsuarioComum
