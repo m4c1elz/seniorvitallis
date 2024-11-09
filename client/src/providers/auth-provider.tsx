@@ -1,6 +1,7 @@
+import { setupAxiosInterceptors } from "@/helpers/setup-axios-interceptors"
 import { api } from "@/lib/api"
 import { UsuarioComum } from "@/types/usuario-comum"
-import { useMutation, UseMutationResult } from "@tanstack/react-query"
+import { useMutation, UseMutationResult, useQuery } from "@tanstack/react-query"
 import { createContext, useState, PropsWithChildren, useContext } from "react"
 
 interface AuthContextType {
@@ -25,6 +26,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [isAuth, setIsAuth] = useState(false)
     const [user, setUser] = useState<UsuarioComum | null>(null)
 
+    const { isPending } = useQuery({
+        queryKey: ["refresh-token"],
+        queryFn: async () => {
+            const refreshResponse = await api.get("/auth/refresh")
+            if (refreshResponse.status !== 200) {
+                return
+            }
+            const response = await api.get("/common-user/me")
+            const user = response.data as UsuarioComum
+            setUser(user)
+            setIsAuth(true)
+            setupAxiosInterceptors(api)
+        },
+        retry: false,
+    })
+
     const loginMutation = useMutation({
         mutationKey: ["login"],
         mutationFn: async (userRequest: {
@@ -38,6 +55,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             const user = response.data as UsuarioComum
             setUser(user)
             setIsAuth(true)
+
+            setupAxiosInterceptors(api)
         },
     })
 
@@ -47,6 +66,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         user,
     } satisfies AuthContextType
 
+    if (isPending) {
+        return <div>Carregando...</div>
+    }
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
