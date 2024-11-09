@@ -2,7 +2,7 @@ export interface Contract {
     usuarioProfissional: UsuarioProfissional
     dataContratacao: string
     prazoContratacao: string
-    statusContratacao: string
+    statusContratacao: "pendente" | "concluida" | "cancelada"
 }
 
 export interface UsuarioProfissional {
