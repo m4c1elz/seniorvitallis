@@ -10,18 +10,18 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useAuth } from "@/providers/auth-provider"
-import { Link } from "@/router"
+import { Link, useNavigate } from "@/router"
 import { useForm } from "react-hook-form"
 import { LoginRequest } from "./types"
 
 export default function Login() {
     const { loginMutation } = useAuth()
     const { register, handleSubmit } = useForm<LoginRequest>()
-
-    const { isPending, isSuccess } = loginMutation
+    const navigate = useNavigate()
 
     async function onSubmit({ email, password }: LoginRequest) {
         await loginMutation.mutateAsync({ email, password })
+        navigate("/history")
     }
 
     return (
@@ -55,7 +55,11 @@ export default function Login() {
                 </form>
             </CardContent>
             <CardFooter className="flex flex-col gap-2.5 justify-center">
-                <Button type="submit" form="login-form" disabled={isPending}>
+                <Button
+                    type="submit"
+                    form="login-form"
+                    disabled={loginMutation.isPending}
+                >
                     Enviar
                 </Button>
                 <p className="text-sm">
