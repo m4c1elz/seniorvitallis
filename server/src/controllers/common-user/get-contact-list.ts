@@ -29,8 +29,9 @@ export async function getContactList(req: Request, res: Response) {
 
     const result = messages.map(message => ({
         idChat: message.idChat,
-        nome: message.usuarioProfissional.nome,
-        mensagem: message.mensagem[0],
+        usuario: message.usuarioProfissional.nome,
+        mensagem: message.mensagem[0].conteudo,
+        data: message.mensagem[0].dataEnvio,
     }))
 
     res.json(result)
