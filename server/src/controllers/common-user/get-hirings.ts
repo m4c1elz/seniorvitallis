@@ -10,7 +10,7 @@ interface HiringFilters {
 
 export async function getHirings(
     req: Request<{}, {}, {}, HiringFilters>,
-    res: Response
+    res: Response,
 ) {
     const { page, search, status } = req.query
 

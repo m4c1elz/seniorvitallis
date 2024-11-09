@@ -3,7 +3,7 @@ import { Request, Response } from "express"
 
 export async function getAvailableProfessionals(
     req: Request<{}, {}, {}, { page: string }>,
-    res: Response
+    res: Response,
 ) {
     let { page } = req.query
 

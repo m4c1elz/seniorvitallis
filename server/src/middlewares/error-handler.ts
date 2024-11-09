@@ -5,7 +5,7 @@ export function errorHandler(
     err: any,
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
 ) {
     if (err instanceof ZodError) {
         const messages = err.errors.map(err => err.message)

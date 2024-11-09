@@ -3,7 +3,7 @@ import { Request, Response } from "express"
 
 export async function getProfessionalById(
     req: Request<{ id: string }>,
-    res: Response
+    res: Response,
 ) {
     const id = Number(req.params.id)
 

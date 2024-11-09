@@ -8,15 +8,15 @@ router.use("*", verifyToken)
 
 router.get(
     "/common-user/professionals",
-    commonUserController.getAvailableProfessionals
+    commonUserController.getAvailableProfessionals,
 )
 router.get(
     "/common-user/professionals/history",
-    commonUserController.getHirings
+    commonUserController.getHirings,
 )
 router.get(
     "/common-user/professionals/:id",
-    commonUserController.getProfessionalById
+    commonUserController.getProfessionalById,
 )
 router.get("/common-user/messages", commonUserController.getContactList)
 

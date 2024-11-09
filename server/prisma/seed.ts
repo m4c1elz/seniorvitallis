@@ -79,7 +79,7 @@ async function main() {
             await prisma.usuarioProfissional.findMany()
         ).map(profissional => profissional.idProfissional)
         const idsDeComuns = (await prisma.usuarioComum.findMany()).map(
-            usuario => usuario.idUsuarioComum
+            usuario => usuario.idUsuarioComum,
         )
 
         spinner.update({

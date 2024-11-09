@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
 
   server:
     dependencies:
@@ -989,6 +993,11 @@ packages:
       yaml:
         optional: true
 
+  prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   prisma@5.22.0:
     resolution: {integrity: sha512-vtpjW3XuYCSnMsNVBjLMNkTj6OZbudcPPTPYHqX0CJfpcdWciI1dM8uHETwmDxxiqEwCIE6WvXucWUetJgfu/A==}
     engines: {node: '>=16.13'}
@@ -1964,6 +1973,8 @@ snapshots:
       lilconfig: 3.1.2
     optionalDependencies:
       tsx: 4.19.2
+
+  prettier@3.3.3: {}
 
   prisma@5.22.0:
     dependencies:
