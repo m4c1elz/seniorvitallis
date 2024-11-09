@@ -19,5 +19,6 @@ router.get(
     commonUserController.getProfessionalById,
 )
 router.get("/common-user/messages", commonUserController.getContactList)
+router.get("/common-user/me", commonUserController.getAuthUser)
 
 export const commonUserRoutes = router
