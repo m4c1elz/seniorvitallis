@@ -39,12 +39,15 @@ async function main() {
         })
 
         await prisma.usuarioComum.createMany({
-            data: Array.from<UsuarioComum>({ length: 20 }).map(() => ({
+            data: Array.from({ length: 20 }).map(() => ({
                 cpf: generateCPF(true),
                 email: faker.internet.email(),
                 endereco: faker.location.streetAddress(),
                 nome: faker.person.fullName(),
                 senhaUsuario: "senha123",
+                telefoneCelular: faker.phone.number({
+                    style: "international",
+                }),
             })),
         })
 
@@ -53,7 +56,7 @@ async function main() {
         })
 
         await prisma.usuarioProfissional.createMany({
-            data: Array.from<UsuarioProfissional>({ length: 80 }).map(() => ({
+            data: Array.from({ length: 80 }).map(() => ({
                 cnpj: generateCNPJ(),
                 cpf: generateCPF(true),
                 descricao: faker.person.jobDescriptor(),
@@ -79,8 +82,12 @@ async function main() {
             usuario => usuario.idUsuarioComum
         )
 
+        spinner.update({
+            text: "Inserindo contratações...",
+        })
+
         await prisma.contratacao.createMany({
-            data: Array.from<Contratacao>({ length: 50 }).map(() => ({
+            data: Array.from({ length: 50 }).map(() => ({
                 fkProfissionalId: getRandomArrayItem(idsDeProfissionais),
                 fkUsuarioComumId: getRandomArrayItem(idsDeComuns),
                 dataContratacao: faker.date.between({
@@ -103,8 +110,12 @@ async function main() {
             })),
         })
 
+        spinner.update({
+            text: "Inserindo avaliações...",
+        })
+
         await prisma.avaliacao.createMany({
-            data: Array.from<Avaliacao>({ length: 100 }).map(() => ({
+            data: Array.from({ length: 100 }).map(() => ({
                 nota: faker.number.float({
                     min: 1,
                     max: 5,
@@ -115,6 +126,39 @@ async function main() {
                 dataAvaliacao: faker.date.anytime(),
             })),
         })
+
+        spinner.update({
+            text: "Criando chats...",
+        })
+
+        await prisma.chat.createMany({
+            data: Array.from({ length: 100 }).map(() => ({
+                usuarioComumId: getRandomArrayItem(idsDeComuns),
+                fkProfissionalId: getRandomArrayItem(idsDeProfissionais),
+                dataInicioChat: faker.date.between({
+                    from: "2024-04-20",
+                    to: "2024-08-30",
+                }),
+            })),
+        })
+
+        spinner.update({
+            text: "Adicionando mensagens aos chats...",
+        })
+
+        const chats = await prisma.chat.findMany()
+
+        for (const chat of chats) {
+            await prisma.mensagem.createMany({
+                data: Array.from({ length: 20 }).map(() => ({
+                    fkUsuarioComumId: chat.usuarioComumId,
+                    fkProfissionalId: chat.fkProfissionalId,
+                    conteudo: faker.lorem.lines(2),
+                    fkChatId: chat.idChat,
+                    dataEnvio: new Date(),
+                })),
+            })
+        }
 
         spinner.success({
             text: "Banco de dados alimentado.",
