@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 export function Sidebar() {
     return (
         <aside className="h-screen w-72 bg-primary border-r border-black/20 flex flex-col justify-between items-center py-4 px-3">
-            <h1>SêniorVitallis</h1>
+            <img src="/sidebar-logo.png" alt="SêniorVitallis Logo" />
             <nav className="flex flex-col gap-4 items-start w-full">
                 <NavLink
                     to="/history"
