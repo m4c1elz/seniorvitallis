@@ -19,6 +19,8 @@ export function errorHandler(
         }
         res.status(500).json(result)
     } else if (err instanceof Error) {
-        // todo
+        res.status(500).json({
+            msg: err.message,
+        })
     }
 }
