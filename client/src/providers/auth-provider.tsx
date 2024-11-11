@@ -31,6 +31,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         queryFn: async () => {
             const refreshResponse = await api.get("/auth/refresh")
             if (refreshResponse.status !== 200) {
+                window.location.href = "/login"
                 throw new Error()
             }
             const response = await api.get("/common-user/me")

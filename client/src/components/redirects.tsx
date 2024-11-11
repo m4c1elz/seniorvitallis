@@ -5,7 +5,7 @@ import { Navigate, useLocation } from "react-router-dom"
 import { useAuth } from "@/providers/auth-provider"
 import { Path } from "@/router"
 
-const PRIVATE: Path[] = ["/history"]
+const PRIVATE: Path[] = ["/history", "/professionals", "/professionals/:id"]
 const PUBLIC: Path[] = ["/login"]
 
 export const Redirects = ({ children }: { children: React.ReactNode }) => {
