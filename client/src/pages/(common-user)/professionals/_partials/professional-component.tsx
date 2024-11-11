@@ -24,7 +24,7 @@ export function ProfessionalComponent({
                     <div className="h-32 aspect-square border border-accent bg-gray-200 grid place-content-center rounded">
                         <img src="" alt={`${nome}`} className="text-center" />
                     </div>
-                    <div className="space-y-1 text-center">
+                    <div className="flex flex-col gap-2 items-center text-center">
                         <h1 className="text-xl font-bold">{nome}</h1>
                         <p className="text-sm">{especialidade}</p>
                         <Availability availability={disponibilidade} />
