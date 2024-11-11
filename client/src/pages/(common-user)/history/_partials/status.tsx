@@ -1,5 +1,5 @@
 import { type Contract } from "../types"
-import { CheckCircle } from "lucide-react"
+import { CheckCircle, XCircle } from "lucide-react"
 
 interface ContractStatusProps {
     status: Contract["statusContratacao"]
@@ -21,7 +21,7 @@ export function ContractStatus({ status }: ContractStatusProps) {
         ),
         cancelada: (
             <div className="flex gap-2 items-center text-destructive">
-                <CheckCircle />
+                <XCircle />
                 <p>Cancelada</p>
             </div>
         ),

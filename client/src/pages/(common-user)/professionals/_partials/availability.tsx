@@ -1,4 +1,4 @@
-import { CheckCircle } from "lucide-react"
+import { CheckCircle, XCircle } from "lucide-react"
 
 interface AvailabilityProps {
     availability: "disponivel" | "indisponivel"
@@ -14,7 +14,7 @@ export function Availability({ availability }: AvailabilityProps) {
         ),
         indisponivel: (
             <div className="flex gap-2 items-center justify-center text-destructive">
-                <CheckCircle />
+                <XCircle />
                 <p>Não Disponível</p>
             </div>
         ),
