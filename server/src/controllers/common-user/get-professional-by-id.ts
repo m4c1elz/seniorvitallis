@@ -35,5 +35,12 @@ export async function getProfessionalById(
         },
     })
 
+    if (!profissional) {
+        res.status(404).json({
+            msg: "Esse profissional não existe.",
+        })
+        return
+    }
+
     res.json({ ...profissional, notaMedia })
 }
