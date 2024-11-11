@@ -59,7 +59,7 @@ async function main() {
             data: Array.from({ length: 80 }).map(() => ({
                 cnpj: generateCNPJ(),
                 cpf: generateCPF(true),
-                descricao: faker.person.jobDescriptor(),
+                descricao: faker.lorem.sentences(2),
                 disponibilidade:
                     Math.floor(Math.random() * 10) > 5
                         ? "disponivel"
