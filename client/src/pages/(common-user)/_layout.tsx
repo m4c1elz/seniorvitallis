@@ -5,7 +5,9 @@ export default function CommonUserLayout() {
     return (
         <main className="flex">
             <Sidebar />
-            <Outlet />
+            <div className="space-y-4 w-3/5 mx-auto my-12">
+                <Outlet />
+            </div>
         </main>
     )
 }
