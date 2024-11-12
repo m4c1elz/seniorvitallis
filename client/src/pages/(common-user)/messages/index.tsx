@@ -22,8 +22,8 @@ export default function Messages() {
                         <div className="flex w-full justify-between items-center bg-primary px-4 py-3 border border-black/20">
                             <div className="space-y-1.5">
                                 <h5>{chat.usuario}</h5>
-                                <p>{chat.mensagem}</p>
-                                <p>
+                                <p className="text-black/50">{chat.mensagem}</p>
+                                <p className="text-black/50 font-medium">
                                     {new Date(chat.data).toLocaleTimeString(
                                         "pt-br",
                                         {
