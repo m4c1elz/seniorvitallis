@@ -10,7 +10,6 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@generouted/react-router": "^1.19.9",
         "@radix-ui/react-avatar": "^1.1.1",
         "@radix-ui/react-label": "^2.1.0",
         "@radix-ui/react-select": "^2.1.2",
@@ -29,6 +28,7 @@
         "tailwindcss-animate": "^1.0.7"
     },
     "devDependencies": {
+        "@generouted/react-router": "^1.19.9",
         "@types/node": "^22.9.0",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
