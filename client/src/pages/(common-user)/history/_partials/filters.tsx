@@ -15,7 +15,7 @@ export function HistoryFilters() {
     return (
         <form className="flex flex-col space-y-2">
             <h2 className="text-xl">Filtrar por</h2>
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-col items-start gap-2 px-2 sm:flex-row sm:items-center sm:px-0">
                 <Select
                     defaultValue={selectedStatus}
                     onValueChange={value => setSelectedStatus(value)}
@@ -33,7 +33,7 @@ export function HistoryFilters() {
                 <Input
                     type="text"
                     placeholder="Pesquise um profissional..."
-                    className="w-[500px]"
+                    className="w-full md:w-[500px]"
                     defaultValue={search}
                     onChange={e => setSearch(e.target.value)}
                 />

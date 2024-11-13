@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 
 export function Sidebar() {
     return (
-        <aside className="bg-primary hidden h-screen w-72 flex-col items-center justify-between border-r border-black/20 px-3 py-4 sm:flex">
+        <aside className="bg-primary hidden h-screen w-72 flex-col items-center justify-between border-r border-black/20 px-3 py-4 md:flex">
             <img src="/sidebar-logo.png" alt="SêniorVitallis Logo" />
             <nav className="flex w-full flex-col items-start gap-4">
                 <NavLink
