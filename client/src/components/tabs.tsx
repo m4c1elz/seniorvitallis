@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 
 export function Tabs() {
     return (
-        <nav className="bg-primary absolute bottom-0 flex w-screen items-center justify-evenly rounded-t-lg border border-black/20 px-4 py-2 text-xs font-medium sm:hidden">
+        <nav className="bg-primary fixed bottom-0 flex w-screen items-center justify-evenly rounded-t-lg border border-black/20 px-4 py-2 text-xs font-medium sm:hidden">
             <NavLink
                 to="/history"
                 className={({ isActive }) =>
@@ -37,8 +37,8 @@ export function Tabs() {
                     `flex flex-col items-center gap-1 ${isActive && "text-accent"}`
                 }
             >
-                <History />
-                <p>Histórico</p>
+                <Settings />
+                <p>Configurações</p>
             </NavLink>
         </nav>
     )
