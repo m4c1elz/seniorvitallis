@@ -13,7 +13,7 @@ export function Contract({
     return (
         <Card
             key={usuarioProfissional.idProfissional}
-            className="px-4 py-3 flex border border-black/20 justify-between items-center"
+            className="transition px-4 py-3 flex border border-black/20 justify-between items-center cursor-pointer hover:bg-black/5"
         >
             <div className="space-y-2">
                 <h3 className="font-medium text-lg">

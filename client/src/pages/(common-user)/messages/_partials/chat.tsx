@@ -5,7 +5,7 @@ type ChatProps = ChatList[number]
 
 export function Chat({ data, mensagem, usuario }: ChatProps) {
     return (
-        <div className="flex w-full justify-between items-center bg-primary px-4 py-3 border border-black/20">
+        <div className="transition flex w-full justify-between items-center bg-primary px-4 py-3 border border-black/20 cursor-pointer hover:bg-black/5">
             <div className="space-y-1.5">
                 <h5>{usuario}</h5>
                 <p className="text-black/50">{mensagem}</p>

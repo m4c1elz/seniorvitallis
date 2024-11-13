@@ -12,7 +12,7 @@ export function ProfessionalComponent({
     disponibilidade,
 }: ProfessionalComponentProps) {
     return (
-        <Card className="grid place-content-center py-3 px-4">
+        <Card className="transition grid place-content-center py-3 px-4 hover:bg-black/5">
             <Link
                 to="/professionals/:id"
                 params={{
