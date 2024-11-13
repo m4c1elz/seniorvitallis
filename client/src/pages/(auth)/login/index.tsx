@@ -25,7 +25,7 @@ export default function Login() {
     }
 
     return (
-        <Card className="w-[350px] bg-primary">
+        <Card className="bg-primary w-[350px]">
             <CardHeader className="text-center">
                 <CardTitle className="font-bold">Login</CardTitle>
                 <CardDescription>Entre com seu usuário.</CardDescription>
@@ -54,7 +54,7 @@ export default function Login() {
                     </div>
                 </form>
             </CardContent>
-            <CardFooter className="flex flex-col gap-2.5 justify-center">
+            <CardFooter className="flex flex-col justify-center gap-2.5">
                 <Button
                     type="submit"
                     form="login-form"

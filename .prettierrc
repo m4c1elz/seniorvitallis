@@ -1,5 +1,13 @@
 {
-  "arrowParens": "avoid",
-  "tabWidth": 4,
-  "semi": false
+    "arrowParens": "avoid",
+    "tabWidth": 4,
+    "semi": false,
+    "overrides": [
+        {
+            "files": ["client/src/**/*.tsx"],
+            "options": {
+                "plugins": ["prettier-plugin-tailwindcss"]
+            }
+        }
+    ]
 }

@@ -7,13 +7,13 @@ interface AvailabilityProps {
 export function Availability({ availability }: AvailabilityProps) {
     const possibleValues = {
         disponivel: (
-            <div className="flex gap-2 items-center text-accent">
+            <div className="text-accent flex items-center gap-2">
                 <CheckCircle />
                 <p>Disponível</p>
             </div>
         ),
         indisponivel: (
-            <div className="flex gap-2 items-center text-destructive">
+            <div className="text-destructive flex items-center gap-2">
                 <XCircle />
                 <p>Não Disponível</p>
             </div>

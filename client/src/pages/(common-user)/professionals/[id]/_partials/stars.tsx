@@ -10,7 +10,7 @@ export function Stars({ reviewCount }: StarsProps) {
             {Array.from({
                 length: Math.floor(reviewCount),
             }).map(() => (
-                <Star className="text-yellow-500 fill-yellow-500" />
+                <Star className="fill-yellow-500 text-yellow-500" />
             ))}
             {Array.from({
                 length: Math.floor(5 - reviewCount),

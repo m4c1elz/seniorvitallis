@@ -8,19 +8,19 @@ interface ContractStatusProps {
 export function ContractStatus({ status }: ContractStatusProps) {
     const possibleStatus = {
         concluida: (
-            <div className="flex gap-2 items-center text-accent">
+            <div className="text-accent flex items-center gap-2">
                 <CheckCircle />
                 <p>Concluída</p>
             </div>
         ),
         pendente: (
-            <div className="flex gap-2 items-center text-warning">
+            <div className="text-warning flex items-center gap-2">
                 <CheckCircle />
                 <p>Pendente</p>
             </div>
         ),
         cancelada: (
-            <div className="flex gap-2 items-center text-destructive">
+            <div className="text-destructive flex items-center gap-2">
                 <XCircle />
                 <p>Cancelada</p>
             </div>
