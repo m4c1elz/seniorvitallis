@@ -65,7 +65,7 @@
         @apply border-border;
     }
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground min-h-screen overflow-hidden;
     }
     h1 {
         @apply text-4xl font-black;
