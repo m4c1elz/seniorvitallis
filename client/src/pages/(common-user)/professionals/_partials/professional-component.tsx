@@ -12,7 +12,7 @@ export function ProfessionalComponent({
     disponibilidade,
 }: ProfessionalComponentProps) {
     return (
-        <Card className="grid place-content-center px-4 py-3 transition hover:bg-black/5">
+        <Card className="transition grid place-content-center py-3 px-4 hover:bg-black/5">
             <Link
                 to="/professionals/:id"
                 params={{
@@ -20,11 +20,11 @@ export function ProfessionalComponent({
                 }}
                 key={idProfissional}
             >
-                <CardContent className="flex flex-col items-center justify-center gap-4">
-                    <div className="border-accent grid aspect-square h-32 place-content-center rounded border bg-gray-200">
+                <CardContent className="flex flex-col justify-center items-center gap-4">
+                    <div className="h-32 aspect-square border border-accent bg-gray-200 grid place-content-center rounded">
                         <img src="" alt={`${nome}`} className="text-center" />
                     </div>
-                    <div className="flex flex-col items-center gap-2 text-center">
+                    <div className="flex flex-col gap-2 items-center text-center">
                         <h1 className="text-xl font-bold">{nome}</h1>
                         <p className="text-sm">{especialidade}</p>
                         <Availability availability={disponibilidade} />

@@ -15,7 +15,7 @@ export function HistoryFilters() {
     return (
         <form className="flex flex-col space-y-2">
             <h2 className="text-xl">Filtrar por</h2>
-            <div className="flex items-center gap-2">
+            <div className="flex gap-2 items-center">
                 <Select
                     defaultValue={selectedStatus}
                     onValueChange={value => setSelectedStatus(value)}

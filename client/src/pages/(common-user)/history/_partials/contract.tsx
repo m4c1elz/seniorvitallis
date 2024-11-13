@@ -13,14 +13,14 @@ export function Contract({
     return (
         <Card
             key={usuarioProfissional.idProfissional}
-            className="flex cursor-pointer items-center justify-between border border-black/20 px-4 py-3 transition hover:bg-black/5"
+            className="transition px-4 py-3 flex border border-black/20 justify-between items-center cursor-pointer hover:bg-black/5"
         >
             <div className="space-y-2">
-                <h3 className="text-lg font-medium">
+                <h3 className="font-medium text-lg">
                     {usuarioProfissional.nome}
                 </h3>
                 <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
+                    <div className="flex gap-2 items-center">
                         <CalendarDays />
                         <p>
                             Solicitado em{" "}
@@ -32,7 +32,7 @@ export function Contract({
                     <ContractStatus status={statusContratacao} />
                 </div>
             </div>
-            <div className="border-accent grid aspect-square h-32 place-content-center rounded border bg-gray-200">
+            <div className="h-32 aspect-square border border-accent bg-gray-200 grid place-content-center rounded">
                 <img src="" alt={`Imagem de ${usuarioProfissional.nome}`} />
             </div>
         </Card>
