@@ -19,9 +19,6 @@
     "prettier-plugin-tailwindcss": "^0.6.8"
   },
   "lint-staged": {
-    "{client,server}/**/*.{ts,tsx,js,json,md}": [
-      "prettier --write",
-      "git add"
-    ]
+    "{client,server}/**/*.{ts,tsx,js,json,md}": "prettier --write"
   }
 }
