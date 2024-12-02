@@ -12,7 +12,7 @@ const loginSchema = z.object({
     }),
 })
 
-export async function commonLogin(req: Request, res: Response) {
+export async function professionalLogin(req: Request, res: Response) {
     const { email, password } = loginSchema.parse(req.body)
 
     const requestedUser = await prisma.usuarioProfissional.findFirst({
