@@ -12,18 +12,19 @@ const loginSchema = z.object({
     }),
 })
 
-export async function login(req: Request, res: Response) {
+export async function commonLogin(req: Request, res: Response) {
     const { email, password } = loginSchema.parse(req.body)
 
-    const requestedUser = await prisma.usuarioComum.findFirst({
+    const requestedUser = await prisma.usuarioProfissional.findFirst({
         where: { email },
         select: {
-            idUsuarioComum: true,
-            email: true,
-            senhaUsuario: true,
+            idProfissional: true,
             nome: true,
+            cpf: true,
+            email: true,
             telefoneCelular: true,
             endereco: true,
+            senhaUsuario: true,
         },
     })
 
@@ -38,7 +39,7 @@ export async function login(req: Request, res: Response) {
     }
 
     const jwtPayload = {
-        id: requestedUser.idUsuarioComum,
+        id: requestedUser.idProfissional,
         usuario: requestedUser.nome,
         email: requestedUser.email,
     } satisfies UserPayload
