@@ -1,74 +1,23 @@
-import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardHeader,
-    CardTitle,
-    CardDescription,
-    CardContent,
-    CardFooter,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useAuth } from "@/providers/auth-provider"
-import { Link, useNavigate } from "@/router"
-import { useForm } from "react-hook-form"
-import { LoginRequest } from "./types"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import { CommonLoginForm } from "./_partials/common-login-form"
 
 export default function Login() {
-    const { loginMutation } = useAuth()
-    const { register, handleSubmit } = useForm<LoginRequest>()
-    const navigate = useNavigate()
-
-    async function onSubmit({ email, password }: LoginRequest) {
-        await loginMutation.mutateAsync({ email, password })
-        navigate("/history")
-    }
-
     return (
-        <Card className="w-[350px] bg-primary">
-            <CardHeader className="text-center">
-                <CardTitle className="font-bold">Login</CardTitle>
-                <CardDescription>Entre com seu usuário.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <form
-                    className="space-y-4"
-                    id="login-form"
-                    onSubmit={handleSubmit(onSubmit)}
-                >
-                    <div className="space-y-2.5">
-                        <Label>E-mail</Label>
-                        <Input
-                            type="email"
-                            placeholder="milaelipe.maciel@gmail.com"
-                            {...register("email")}
-                        />
-                    </div>
-                    <div className="space-y-2.5">
-                        <Label>Senha</Label>
-                        <Input
-                            type="password"
-                            placeholder="senha123"
-                            {...register("password")}
-                        />
-                    </div>
-                </form>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-2.5 justify-center">
-                <Button
-                    type="submit"
-                    form="login-form"
-                    disabled={loginMutation.isPending}
-                >
-                    Enviar
-                </Button>
-                <p className="text-sm">
-                    Não possui conta?{" "}
-                    <Link to="/login" className="text-accent underline">
-                        Cadastre-se
-                    </Link>
-                </p>
-            </CardFooter>
-        </Card>
+        <Tabs defaultValue="common">
+            <TabsList className="w-[350px]">
+                <TabsTrigger value="common" className="bg-primary flex-1">
+                    Comum
+                </TabsTrigger>
+                <TabsTrigger value="professional" className="bg-primary flex-1">
+                    Profissional
+                </TabsTrigger>
+            </TabsList>
+            <TabsContent value="common">
+                <CommonLoginForm />
+            </TabsContent>
+            <TabsContent value="professional">
+                <div>todo</div>
+            </TabsContent>
+        </Tabs>
     )
 }
