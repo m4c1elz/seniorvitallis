@@ -1,6 +1,7 @@
 import { setupAxiosInterceptors } from "@/helpers/setup-axios-interceptors"
 import { api } from "@/lib/api"
 import { UsuarioComum } from "@/types/usuario-comum"
+import { UsuarioProfissional } from "@/types/usuario-profissional"
 import { useMutation, UseMutationResult, useQuery } from "@tanstack/react-query"
 import { createContext, useState, PropsWithChildren, useContext } from "react"
 
@@ -23,7 +24,7 @@ interface AuthContextType {
         },
         unknown
     >
-    user: UsuarioComum | null
+    user: UsuarioComum | UsuarioProfissional | null
     isAuth: boolean
 }
 
@@ -33,7 +34,9 @@ interface AuthProviderProps extends PropsWithChildren {}
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const [isAuth, setIsAuth] = useState(false)
-    const [user, setUser] = useState<UsuarioComum | null>(null)
+    const [user, setUser] = useState<UsuarioComum | UsuarioProfissional | null>(
+        null,
+    )
 
     const { isPending } = useQuery({
         queryKey: ["refresh-token"],
@@ -62,7 +65,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 "/auth/common-user/login",
                 userRequest,
             )
-            const user = response.data as UsuarioComum
+            const user = response.data as UsuarioProfissional
             setUser(user)
             setIsAuth(true)
 
