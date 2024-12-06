@@ -5,7 +5,16 @@ import { useMutation, UseMutationResult, useQuery } from "@tanstack/react-query"
 import { createContext, useState, PropsWithChildren, useContext } from "react"
 
 interface AuthContextType {
-    loginMutation: UseMutationResult<
+    commonLoginMutation: UseMutationResult<
+        void,
+        Error,
+        {
+            email: string
+            password: string
+        },
+        unknown
+    >
+    professionalLoginMutation: UseMutationResult<
         void,
         Error,
         {
@@ -43,7 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         retry: false,
     })
 
-    const loginMutation = useMutation({
+    const commonLoginMutation = useMutation({
         mutationKey: ["login"],
         mutationFn: async (userRequest: {
             email: string
@@ -60,10 +69,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
             setupAxiosInterceptors(api)
         },
     })
+    const professionalLoginMutation = useMutation({
+        mutationKey: ["login"],
+        mutationFn: async (userRequest: {
+            email: string
+            password: string
+        }) => {
+            const response = await api.post(
+                "/auth/professional/login",
+                userRequest,
+            )
+            const user = response.data as UsuarioComum
+            setUser(user)
+            setIsAuth(true)
+
+            setupAxiosInterceptors(api)
+        },
+    })
 
     const value = {
         isAuth,
-        loginMutation,
+        commonLoginMutation,
+        professionalLoginMutation,
         user,
     } satisfies AuthContextType
 

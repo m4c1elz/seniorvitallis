@@ -15,14 +15,14 @@ import { LoginRequest } from "../types"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "@/router"
 
-export function CommonLoginForm() {
-    const { commonLoginMutation } = useAuth()
+export function ProfessionalLoginForm() {
+    const { professionalLoginMutation } = useAuth()
     const { register, handleSubmit } = useForm<LoginRequest>()
     const navigate = useNavigate()
 
     async function onSubmit({ email, password }: LoginRequest) {
-        await commonLoginMutation.mutateAsync({ email, password })
-        navigate("/history")
+        await professionalLoginMutation.mutateAsync({ email, password })
+        navigate("/requests")
     }
 
     return (
@@ -59,7 +59,7 @@ export function CommonLoginForm() {
                 <Button
                     type="submit"
                     form="login-form"
-                    disabled={commonLoginMutation.isPending}
+                    disabled={professionalLoginMutation.isPending}
                 >
                     Enviar
                 </Button>

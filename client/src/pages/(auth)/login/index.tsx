@@ -1,5 +1,6 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { CommonLoginForm } from "./_partials/common-login-form"
+import { ProfessionalLoginForm } from "./_partials/professional-login-form"
 
 export default function Login() {
     return (
@@ -16,7 +17,7 @@ export default function Login() {
                 <CommonLoginForm />
             </TabsContent>
             <TabsContent value="professional">
-                <div>todo</div>
+                <ProfessionalLoginForm />
             </TabsContent>
         </Tabs>
     )
