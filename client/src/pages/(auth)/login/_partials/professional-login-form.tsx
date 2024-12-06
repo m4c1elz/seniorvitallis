@@ -29,7 +29,9 @@ export function ProfessionalLoginForm() {
         <Card className="bg-primary w-[350px]">
             <CardHeader className="text-center">
                 <CardTitle className="font-bold">Login</CardTitle>
-                <CardDescription>Entre com seu usuário.</CardDescription>
+                <CardDescription>
+                    Entre como usuário profissional.
+                </CardDescription>
             </CardHeader>
             <CardContent>
                 <form
