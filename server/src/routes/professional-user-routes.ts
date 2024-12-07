@@ -4,15 +4,13 @@ import { Router } from "express"
 
 const router = Router()
 
+router.use("*", verifyToken)
+
+router.get("/professional-user/requests", professionalUserController.requests)
+router.get("/professional-user/me", professionalUserController.getAuthUser)
 router.get(
-    "/professional-user/requests",
-    verifyToken,
-    professionalUserController.requests,
-)
-router.get(
-    "/professional-user/me",
-    verifyToken,
-    professionalUserController.getAuthUser,
+    "/professional-user/my-clients",
+    professionalUserController.getClients,
 )
 
 export const professionalUserRoutes = router
