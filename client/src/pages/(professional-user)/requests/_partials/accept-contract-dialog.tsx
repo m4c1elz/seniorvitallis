@@ -18,8 +18,8 @@ export function AcceptContractDialog() {
                     Defina um preço para a contratação atual.
                 </DialogDescription>
                 <form className="flex-1 space-y-2">
-                    <Label htmlFor="price">Preço</Label>
-                    <Input type="number" name="price" />
+                    <Label htmlFor="price">Preço (R$)</Label>
+                    <Input type="number" name="price" prefix="R$" />
                 </form>
                 <DialogFooter className="pt-2">
                     <Button>Aceitar</Button>
