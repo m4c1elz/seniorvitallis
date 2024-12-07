@@ -2,7 +2,13 @@ import { api } from "@/lib/api"
 import { useQuery } from "@tanstack/react-query"
 import { ContractRequests } from "./types"
 import { CalendarDays, CalendarX } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+    CardFooter,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
 import { AcceptContractDialog } from "./_partials/accept-contract-dialog"
@@ -24,6 +30,13 @@ export default function Requests() {
                 {requests.map(request => (
                     <Card className="w-64 text-center">
                         <CardHeader>
+                            <div className="border-accent m-auto grid aspect-square w-32 place-content-center rounded border bg-gray-200">
+                                <img
+                                    src=""
+                                    alt={`${request.usuarioComum.nome}`}
+                                    className="text-center"
+                                />
+                            </div>
                             <CardTitle>{request.usuarioComum.nome}</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2">
@@ -45,24 +58,29 @@ export default function Requests() {
                                     ).toLocaleDateString("pt-br")}
                                 </p>
                             </div>
-                            <div className="flex w-full items-center gap-2">
-                                <Dialog>
-                                    <DialogTrigger asChild>
-                                        <Button className="flex-1">
-                                            Aceitar
-                                        </Button>
-                                    </DialogTrigger>
-                                    <DialogContent>
-                                        <AcceptContractDialog />
-                                    </DialogContent>
-                                </Dialog>
-                                <Button
-                                    className="flex-1"
-                                    variant="destructive"
-                                >
-                                    Recusar
+                            <CardFooter className="flex-col gap-3 p-0 pt-2">
+                                <div className="flex w-full items-center gap-2">
+                                    <Dialog>
+                                        <DialogTrigger asChild>
+                                            <Button className="w-1/2">
+                                                Aceitar
+                                            </Button>
+                                        </DialogTrigger>
+                                        <DialogContent>
+                                            <AcceptContractDialog />
+                                        </DialogContent>
+                                    </Dialog>
+                                    <Button
+                                        className="w-1/2"
+                                        variant="destructive"
+                                    >
+                                        Recusar
+                                    </Button>
+                                </div>
+                                <Button variant="secondary" className="w-full">
+                                    Ir ao chat
                                 </Button>
-                            </div>
+                            </CardFooter>
                         </CardContent>
                     </Card>
                 ))}

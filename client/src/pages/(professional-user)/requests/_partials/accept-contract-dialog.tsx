@@ -1,5 +1,6 @@
 import {
     DialogHeader,
+    DialogTitle,
     DialogDescription,
     DialogFooter,
     DialogClose,
@@ -12,6 +13,7 @@ export function AcceptContractDialog() {
     return (
         <>
             <DialogHeader>
+                <DialogTitle>Aceitar contratação</DialogTitle>
                 <DialogDescription>
                     Defina um preço para a contratação atual.
                 </DialogDescription>
