@@ -1,9 +1,11 @@
 import { api } from "@/lib/api"
 import { useQuery } from "@tanstack/react-query"
 import { ContractRequests } from "./types"
-import { Calendar, CalendarDays, CalendarX } from "lucide-react"
+import { CalendarDays, CalendarX } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
+import { AcceptContractDialog } from "./_partials/accept-contract-dialog"
 
 export default function Requests() {
     const { data: requests, isPending } = useQuery<ContractRequests>({
@@ -18,7 +20,7 @@ export default function Requests() {
     if (requests)
         return (
             <>
-                <h1>Solicitações de contratação</h1>
+                <h3>Solicitações de contratação</h3>
                 {requests.map(request => (
                     <Card className="w-64 text-center">
                         <CardHeader>
@@ -44,7 +46,16 @@ export default function Requests() {
                                 </p>
                             </div>
                             <div className="flex w-full items-center gap-2">
-                                <Button className="flex-1">Aceitar</Button>
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <Button className="flex-1">
+                                            Aceitar
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent>
+                                        <AcceptContractDialog />
+                                    </DialogContent>
+                                </Dialog>
                                 <Button
                                     className="flex-1"
                                     variant="destructive"
