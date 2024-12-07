@@ -5,6 +5,7 @@ import { commonUserRoutes } from "@/routes/common-user-routes"
 import { authRoutes } from "@/routes/auth-routes"
 import { errorHandler } from "@/middlewares/error-handler"
 import cors from "cors"
+import { professionalUserRoutes } from "./routes/professional-user-routes"
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(cookieParser())
 
 app.use(authRoutes)
 app.use(commonUserRoutes)
+app.use(professionalUserRoutes)
 app.use(errorHandler)
 
 app.listen(port, () => {
