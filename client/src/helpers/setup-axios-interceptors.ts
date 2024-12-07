@@ -11,6 +11,13 @@ export function setupAxiosInterceptors(axios: AxiosInstance) {
                     throw new Error()
                 }
 
+                if (prevRequest.url === "/common-user/me") {
+                    return axios({
+                        method: "GET",
+                        url: "/professional-user/me",
+                    })
+                }
+
                 await axios.get("/auth/refresh")
                 return axios(prevRequest)
             } catch (error) {

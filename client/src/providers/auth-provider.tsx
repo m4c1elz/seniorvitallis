@@ -3,6 +3,7 @@ import { api } from "@/lib/api"
 import { UsuarioComum } from "@/types/usuario-comum"
 import { UsuarioProfissional } from "@/types/usuario-profissional"
 import { useMutation, UseMutationResult, useQuery } from "@tanstack/react-query"
+import { AxiosError } from "axios"
 import { createContext, useState, PropsWithChildren, useContext } from "react"
 
 interface AuthContextType {
@@ -46,9 +47,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 window.location.href = "/login"
                 throw new Error()
             }
-            const response = await api.get("/common-user/me")
-            const user = response.data as UsuarioComum
-            setUser(user)
+            try {
+                const response = await api.get("/common-user/me")
+                const user = response.data as UsuarioComum
+                setUser(user)
+            } catch (error) {
+                if (error instanceof AxiosError && error.status == 404) {
+                    const response = await api.get("/professional-user/me")
+                    const user = response.data as UsuarioProfissional
+                    setUser(user)
+                }
+            }
             setIsAuth(true)
             setupAxiosInterceptors(api)
         },
@@ -65,24 +74,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 "/auth/common-user/login",
                 userRequest,
             )
-            const user = response.data as UsuarioProfissional
+            const user = response.data as UsuarioComum
             setUser(user)
             setIsAuth(true)
 
             setupAxiosInterceptors(api)
         },
     })
+
     const professionalLoginMutation = useMutation({
-        mutationKey: ["login"],
+        mutationKey: ["professional-login"],
         mutationFn: async (userRequest: {
             email: string
             password: string
         }) => {
             const response = await api.post(
-                "/auth/professional/login",
+                "/auth/common-user/login",
                 userRequest,
             )
-            const user = response.data as UsuarioComum
+            const user = response.data as UsuarioProfissional
             setUser(user)
             setIsAuth(true)
 

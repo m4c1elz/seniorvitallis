@@ -3,16 +3,16 @@ import { Tabs } from "@/components/tabs"
 import { Contact, History, MessageCircle, Settings } from "lucide-react"
 import { Outlet } from "react-router-dom"
 
-export default function CommonUserLayout() {
+export default function ProfessionalUserLayout() {
     return (
         <main className="flex">
             <Sidebar.Root>
                 <Sidebar.Navigation>
-                    <Sidebar.Option to="/history" icon={History}>
-                        Histórico
+                    <Sidebar.Option to="/requests" icon={History}>
+                        Contratações
                     </Sidebar.Option>
-                    <Sidebar.Option to="/professionals" icon={Contact}>
-                        Profissionais
+                    <Sidebar.Option to="/my-clients" icon={Contact}>
+                        Meus clientes
                     </Sidebar.Option>
                     <Sidebar.Option to="/messages" icon={MessageCircle}>
                         Mensagens
