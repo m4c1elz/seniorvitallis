@@ -23,7 +23,7 @@ export function AcceptContractDialog() {
                 </form>
                 <DialogFooter className="pt-2">
                     <Button>Aceitar</Button>
-                    <DialogClose>
+                    <DialogClose asChild>
                         <Button variant="destructive">Cancelar</Button>
                     </DialogClose>
                 </DialogFooter>
