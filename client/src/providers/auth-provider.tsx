@@ -27,6 +27,7 @@ interface AuthContextType {
     >
     user: UsuarioComum | UsuarioProfissional | null
     isAuth: boolean
+    logoutMutation: UseMutationResult<void, Error, void, unknown>
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
@@ -100,11 +101,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
         },
     })
 
+    const logoutMutation = useMutation({
+        mutationKey: ["logout"],
+        mutationFn: async () => {
+            await api.post("/auth/logout")
+            setUser(null)
+            setIsAuth(false)
+            api.interceptors.response.clear()
+        },
+    })
+
     const value = {
         isAuth,
         commonLoginMutation,
         professionalLoginMutation,
         user,
+        logoutMutation,
     } satisfies AuthContextType
 
     if (isPending) {
