@@ -12,5 +12,9 @@ router.get(
     "/professional-user/my-clients",
     professionalUserController.getClients,
 )
+router.get(
+    "/professional-user/messages",
+    professionalUserController.getContactList,
+)
 
 export const professionalUserRoutes = router
