@@ -51,15 +51,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 const response = await api.get("/common-user/me")
                 const user = response.data as UsuarioComum
                 setUser(user)
-                console.log("(auth-provider) logged in as common user")
             } catch (error) {
                 if (error instanceof AxiosError && error.status == 404) {
                     const response = await api.get("/professional-user/me")
                     const user = response.data as UsuarioProfissional
                     setUser(user)
-                    console.log(
-                        "(auth-provider) logged in as professional user ",
-                    )
                 }
             }
             setIsAuth(true)

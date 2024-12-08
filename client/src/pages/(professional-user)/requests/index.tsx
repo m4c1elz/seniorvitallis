@@ -18,7 +18,10 @@ export default function Requests() {
             <>
                 <h3>Solicitações de contratação</h3>
                 {requests.map(request => (
-                    <ContractRequestCard {...request} />
+                    <ContractRequestCard
+                        key={request.idContratacao}
+                        {...request}
+                    />
                 ))}
             </>
         )

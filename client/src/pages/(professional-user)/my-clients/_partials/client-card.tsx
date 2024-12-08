@@ -6,18 +6,16 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
 import { CalendarDays, CalendarX } from "lucide-react"
-import { AcceptContractDialog } from "./accept-contract-dialog"
-import { ContractRequest } from "../types"
+import { Client } from "../types"
 
-interface ContractRequestCardProps extends ContractRequest {}
+interface ClientCardProps extends Client {}
 
-export function ContractRequestCard({
+export function ClientCard({
     usuarioComum,
     dataContratacao,
     prazoContratacao,
-}: ContractRequestCardProps) {
+}: ClientCardProps) {
     return (
         <Card className="w-64 text-center">
             <CardHeader>
@@ -33,7 +31,7 @@ export function ContractRequestCard({
             <CardContent className="space-y-2">
                 <div className="flex items-center gap-2">
                     <CalendarDays />
-                    <p className="text-sm font-medium">
+                    <p className="whitespace-nowrap text-sm font-medium">
                         Solicitado em{" "}
                         {new Date(dataContratacao).toLocaleDateString("pt-br")}
                     </p>
@@ -46,21 +44,8 @@ export function ContractRequestCard({
                     </p>
                 </div>
                 <CardFooter className="flex-col gap-3 p-0 pt-2">
-                    <div className="flex w-full items-center gap-2">
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button className="w-1/2">Aceitar</Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                                <AcceptContractDialog />
-                            </DialogContent>
-                        </Dialog>
-                        <Button className="w-1/2" variant="destructive">
-                            Recusar
-                        </Button>
-                    </div>
                     <Button variant="secondary" className="w-full">
-                        Enviar mensagem
+                        Ir ao chat
                     </Button>
                 </CardFooter>
             </CardContent>

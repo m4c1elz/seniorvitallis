@@ -7,6 +7,8 @@ export type Path =
     | `/history`
     | `/login`
     | `/messages`
+    | `/my-clients`
+    | `/options`
     | `/professionals`
     | `/professionals/:id`
     | `/requests`
