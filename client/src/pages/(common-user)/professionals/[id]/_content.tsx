@@ -3,6 +3,12 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Availability } from "../_partials/availability"
 import { IndividualProfessionalResponse } from "./types"
 import { Stars } from "./_partials/stars"
+import { useMutation } from "@tanstack/react-query"
+import { useParams } from "@/router"
+import { api } from "@/lib/api"
+import { LoaderCircle } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
+import { AxiosError } from "axios"
 
 interface ProfessionalContentProps extends IndividualProfessionalResponse {}
 
@@ -13,25 +19,62 @@ export function ProfessionalContent({
     especialidade,
     notaMedia,
 }: ProfessionalContentProps) {
+    const { id } = useParams("/professionals/:id")
+    const { toast } = useToast()
+
+    const { mutateAsync: createRequest, isPending } = useMutation({
+        mutationKey: ["create-request", { professionalId: Number(id) }],
+        mutationFn: async () => {
+            await api.post(`/common-user/professionals/${id}/contracts`)
+        },
+        onSuccess: () => {
+            toast({
+                title: "Sucesso!",
+                description: "Contratação solicitada com sucesso.",
+            })
+        },
+        onError: (err: AxiosError) => {
+            if (err.status == 400) {
+                toast({
+                    title: "Profissional já solicitado",
+                    description:
+                        "Você já pediu uma contratação deste profissional.",
+                })
+            }
+        },
+    })
+
     return (
         <div className="space-y-8">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
                 <div className="space-y-4">
                     <h3>{nome}</h3>
                     <Availability availability={disponibilidade} />
-                    <Button className="w-min">Contratar</Button>
+                    <Button
+                        className="w-min"
+                        disabled={isPending}
+                        onClick={() => createRequest()}
+                    >
+                        {isPending ? (
+                            <LoaderCircle className="animate-spin" />
+                        ) : (
+                            "Contratar"
+                        )}
+                    </Button>
                 </div>
-                <Avatar className="border-accent border-2 w-48 h-48">
+                <Avatar className="border-accent h-48 w-48 border-2">
                     <AvatarFallback className="bg-zinc-200" />
                 </Avatar>
             </div>
             <div className="space-y-4">
                 <h4>Avaliação</h4>
                 <div className="flex items-center gap-4">
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-2">
                         <Stars reviewCount={notaMedia} />
                     </div>
-                    <h5>{notaMedia.toFixed(1)}</h5>
+                    <h5>
+                        {notaMedia ? notaMedia.toFixed(1) : "Indisponível."}
+                    </h5>
                 </div>
             </div>
             <div className="space-y-4">

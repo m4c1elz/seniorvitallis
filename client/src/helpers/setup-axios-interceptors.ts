@@ -6,6 +6,10 @@ export function setupAxiosInterceptors(axios: AxiosInstance) {
         async (err: AxiosError) => {
             const prevRequest = err.config as InternalAxiosRequestConfig
 
+            if (err.status !== 401 && err.status !== 403) {
+                return Promise.reject(err)
+            }
+
             try {
                 if (prevRequest.url === "/auth/refresh") {
                     throw new Error()
