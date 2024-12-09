@@ -19,9 +19,9 @@ export function ContractRequestCard({
     prazoContratacao,
 }: ContractRequestCardProps) {
     return (
-        <Card className="w-64 text-center">
-            <CardHeader>
-                <div className="border-accent m-auto grid aspect-square w-32 place-content-center rounded border bg-gray-200">
+        <Card className="flex w-64 flex-col text-center">
+            <CardHeader className="flex-1">
+                <div className="border-accent m-auto mb-2 grid aspect-square h-32 place-content-center rounded border bg-gray-200">
                     <img
                         src=""
                         alt={`${usuarioComum.nome}`}
@@ -30,17 +30,17 @@ export function ContractRequestCard({
                 </div>
                 <CardTitle>{usuarioComum.nome}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
+            <CardContent className="flex-1 space-y-2">
                 <div className="flex items-center gap-2">
                     <CalendarDays />
-                    <p className="text-sm font-medium">
+                    <p className="whitespace-nowrap text-sm font-medium">
                         Solicitado em{" "}
                         {new Date(dataContratacao).toLocaleDateString("pt-br")}
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
                     <CalendarX />
-                    <p className="text-sm font-medium">
+                    <p className="whitespace-nowrap text-sm font-medium">
                         Válido até{" "}
                         {new Date(prazoContratacao).toLocaleDateString("pt-br")}
                     </p>

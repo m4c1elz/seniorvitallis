@@ -17,12 +17,17 @@ export default function Requests() {
         return (
             <>
                 <h3>Solicitações de contratação</h3>
-                {requests.map(request => (
-                    <ContractRequestCard
-                        key={request.idContratacao}
-                        {...request}
-                    />
-                ))}
+                {requests.length == 0 && (
+                    <p>Você não possui nenhuma solicitação de contratação.</p>
+                )}
+                <div className="grid grid-cols-2 gap-2 xl:grid-cols-3 2xl:grid-cols-4">
+                    {requests.map(request => (
+                        <ContractRequestCard
+                            key={request.idContratacao}
+                            {...request}
+                        />
+                    ))}
+                </div>
             </>
         )
 }

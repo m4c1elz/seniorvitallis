@@ -17,9 +17,12 @@ export default function MyClients() {
         return (
             <>
                 <h3>Meus clientes</h3>
-                {clients.map(client => (
-                    <ClientCard key={client.idContratacao} {...client} />
-                ))}
+                {clients.length == 0 && <p>Você não possui clientes.</p>}
+                <div className="grid grid-cols-2 gap-2 xl:grid-cols-3 2xl:grid-cols-4">
+                    {clients.map(client => (
+                        <ClientCard key={client.idContratacao} {...client} />
+                    ))}
+                </div>
             </>
         )
     }
