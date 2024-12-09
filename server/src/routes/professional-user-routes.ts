@@ -17,6 +17,10 @@ router.get(
     professionalUserController.getContactList,
 )
 router.patch(
+    "/professional-user/requests/:id/accept",
+    professionalUserController.acceptContract,
+)
+router.patch(
     "/professional-user/requests/:id/cancel",
     professionalUserController.rejectContact,
 )
