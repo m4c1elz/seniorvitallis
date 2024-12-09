@@ -2,10 +2,10 @@ import { prisma } from "@/lib/prisma"
 import { Request, Response } from "express"
 
 export async function getAvailableProfessionals(
-    req: Request<{}, {}, {}, { page: string }>,
+    req: Request<{}, {}, {}, { page: string; search: string }>,
     res: Response,
 ) {
-    let { page } = req.query
+    let { page, search } = req.query
 
     if (isNaN(Number(page))) {
         page = "1"
@@ -29,6 +29,9 @@ export async function getAvailableProfessionals(
         },
         where: {
             disponibilidade: "disponivel",
+            nome: {
+                contains: search,
+            },
         },
         take: limit,
         skip: (professionalPage - 1) * limit,
