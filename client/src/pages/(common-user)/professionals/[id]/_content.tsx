@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Availability } from "../_partials/availability"
 import { IndividualProfessionalResponse } from "./types"
 import { Stars } from "./_partials/stars"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useParams } from "@/router"
 import { api } from "@/lib/api"
 import { LoaderCircle } from "lucide-react"
@@ -21,6 +21,7 @@ export function ProfessionalContent({
 }: ProfessionalContentProps) {
     const { id } = useParams("/professionals/:id")
     const { toast } = useToast()
+    const queryClient = useQueryClient()
 
     const { mutateAsync: createRequest, isPending } = useMutation({
         mutationKey: ["create-request", { professionalId: Number(id) }],
@@ -31,6 +32,9 @@ export function ProfessionalContent({
             toast({
                 title: "Sucesso!",
                 description: "Contratação solicitada com sucesso.",
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["get-current-professionals"],
             })
         },
         onError: (err: AxiosError) => {
