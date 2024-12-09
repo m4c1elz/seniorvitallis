@@ -67,6 +67,7 @@ export function ContractRequestCard({
                             </DialogTrigger>
                             <DialogContent>
                                 <AcceptContractDialog
+                                    requestId={idContratacao}
                                     toggleDialogFn={setAcceptDialogOpen}
                                 />
                             </DialogContent>

@@ -6,8 +6,9 @@ import {
     AlertDialogCancel,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { useToast } from "@/hooks/use-toast"
 import { api } from "@/lib/api"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { LoaderCircle } from "lucide-react"
 
 interface RejectContractDialogProps {
@@ -19,10 +20,21 @@ export function RejectContractDialog({
     toggleDialogFn,
     requestId,
 }: RejectContractDialogProps) {
+    const { toast } = useToast()
+    const queryClient = useQueryClient()
+
     const { mutateAsync: cancelRequest, isPending } = useMutation({
         mutationFn: async () => {
             await api.patch(`/professional-user/requests/${requestId}/cancel`)
             toggleDialogFn(false)
+        },
+        onSuccess: () => {
+            toast({
+                description: "Solicitação rejeitada.",
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["get-contract-requests"],
+            })
         },
     })
 
