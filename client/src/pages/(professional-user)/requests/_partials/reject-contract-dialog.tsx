@@ -56,7 +56,9 @@ export function RejectContractDialog({
                     onClick={() => cancelRequest()}
                 >
                     {isPending ? (
-                        <LoaderCircle className="animate-spin" />
+                        <>
+                            <LoaderCircle className="animate-spin" /> Aguarde...
+                        </>
                     ) : (
                         "Sim, cancelar"
                     )}

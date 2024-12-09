@@ -13,6 +13,7 @@ import { api } from "@/lib/api"
 import { useForm } from "react-hook-form"
 import { useToast } from "@/hooks/use-toast"
 import { useQueryClient } from "@tanstack/react-query"
+import { LoaderCircle } from "lucide-react"
 
 interface AcceptContractDialogProps {
     toggleDialogFn: (open: boolean) => void
@@ -31,7 +32,7 @@ export function AcceptContractDialog({
     const { toast } = useToast()
     const queryClient = useQueryClient()
 
-    const { mutateAsync: acceptRequest } = useMutation({
+    const { mutateAsync: acceptRequest, isPending } = useMutation({
         mutationFn: async (price: number) => {
             await api.patch(`/professional-user/requests/${requestId}/accept`, {
                 price,
@@ -69,8 +70,19 @@ export function AcceptContractDialog({
                     <Input type="number" {...register("price")} />
                 </form>
                 <DialogFooter className="pt-2">
-                    <Button type="submit" form="accept-request-form">
-                        Aceitar
+                    <Button
+                        type="submit"
+                        form="accept-request-form"
+                        disabled={isPending}
+                    >
+                        {isPending ? (
+                            <>
+                                <LoaderCircle className="animate-spin" />{" "}
+                                Aguarde...
+                            </>
+                        ) : (
+                            "Aceitar"
+                        )}
                     </Button>
                     <DialogClose asChild>
                         <Button variant="destructive">Cancelar</Button>

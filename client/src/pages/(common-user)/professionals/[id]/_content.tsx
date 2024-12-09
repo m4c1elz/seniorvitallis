@@ -60,7 +60,10 @@ export function ProfessionalContent({
                         onClick={() => createRequest()}
                     >
                         {isPending ? (
-                            <LoaderCircle className="animate-spin" />
+                            <>
+                                <LoaderCircle className="animate-spin" />{" "}
+                                Solicitando...
+                            </>
                         ) : (
                             "Contratar"
                         )}
