@@ -7,9 +7,16 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
+import {
+    AlertDialog,
+    AlertDialogTrigger,
+    AlertDialogContent,
+} from "@/components/ui/alert-dialog"
 import { CalendarDays, CalendarX } from "lucide-react"
 import { AcceptContractDialog } from "./accept-contract-dialog"
 import { ContractRequest } from "../types"
+import { RejectContractDialog } from "./reject-contract-dialog"
+import { useState } from "react"
 
 interface ContractRequestCardProps extends ContractRequest {}
 
@@ -17,7 +24,11 @@ export function ContractRequestCard({
     usuarioComum,
     dataContratacao,
     prazoContratacao,
+    idContratacao,
 }: ContractRequestCardProps) {
+    const [acceptDialogOpen, setAcceptDialogOpen] = useState(false)
+    const [rejectDialogOpen, setRejectDialogOpen] = useState(false)
+
     return (
         <Card className="flex w-64 flex-col text-center">
             <CardHeader className="flex-1">
@@ -47,17 +58,35 @@ export function ContractRequestCard({
                 </div>
                 <CardFooter className="flex-col gap-3 p-0 pt-2">
                     <div className="flex w-full items-center gap-2">
-                        <Dialog>
+                        <Dialog
+                            open={acceptDialogOpen}
+                            onOpenChange={setAcceptDialogOpen}
+                        >
                             <DialogTrigger asChild>
                                 <Button className="w-1/2">Aceitar</Button>
                             </DialogTrigger>
                             <DialogContent>
-                                <AcceptContractDialog />
+                                <AcceptContractDialog
+                                    toggleDialogFn={setAcceptDialogOpen}
+                                />
                             </DialogContent>
                         </Dialog>
-                        <Button className="w-1/2" variant="destructive">
-                            Recusar
-                        </Button>
+                        <AlertDialog
+                            open={rejectDialogOpen}
+                            onOpenChange={setRejectDialogOpen}
+                        >
+                            <AlertDialogTrigger asChild>
+                                <Button className="w-1/2" variant="destructive">
+                                    Recusar
+                                </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <RejectContractDialog
+                                    requestId={idContratacao}
+                                    toggleDialogFn={setRejectDialogOpen}
+                                />
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </div>
                     <Button variant="secondary" className="w-full">
                         Enviar mensagem

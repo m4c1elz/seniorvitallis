@@ -9,7 +9,13 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 
-export function AcceptContractDialog() {
+interface AcceptContractDialogProps {
+    toggleDialogFn: (open: boolean) => void
+}
+
+export function AcceptContractDialog({
+    toggleDialogFn,
+}: AcceptContractDialogProps) {
     return (
         <>
             <DialogHeader>
