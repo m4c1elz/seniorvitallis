@@ -5,9 +5,7 @@ export async function requests(req: Request, res: Response) {
     const requests = await prisma.contratacao.findMany({
         where: {
             fkProfissionalId: { equals: req.user.id },
-            NOT: {
-                statusContratacao: "concluida",
-            },
+            statusContratacao: "pendente",
         },
         select: {
             idContratacao: true,

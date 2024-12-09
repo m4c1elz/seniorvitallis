@@ -27,6 +27,9 @@ export async function getAvailableProfessionals(
             disponibilidade: true,
             especialidade: true,
         },
+        where: {
+            disponibilidade: "disponivel",
+        },
         take: limit,
         skip: (professionalPage - 1) * limit,
     })

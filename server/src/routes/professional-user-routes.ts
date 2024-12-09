@@ -16,5 +16,9 @@ router.get(
     "/professional-user/messages",
     professionalUserController.getContactList,
 )
+router.patch(
+    "/professional-user/requests/:id",
+    professionalUserController.rejectContact,
+)
 
 export const professionalUserRoutes = router
