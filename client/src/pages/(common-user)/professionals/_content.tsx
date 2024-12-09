@@ -1,5 +1,6 @@
 import { Professional } from "./types"
 import { ProfessionalComponent } from "./_partials/professional-component"
+import { Filters } from "./_partials/filters"
 
 interface ProfessionalsContentProps {
     professionals: Professional[]
@@ -11,6 +12,7 @@ export function ProfessionalsContent({
     return (
         <>
             <h1 className="text-2xl font-bold">Profissionais</h1>
+            <Filters />
             <div className="grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
                 {professionals.map(professional => (
                     <ProfessionalComponent
