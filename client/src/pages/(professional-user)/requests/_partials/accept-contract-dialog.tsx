@@ -50,10 +50,6 @@ export function AcceptContractDialog({
         },
     })
 
-    function onSubmit({ price }: AcceptFormType) {
-        acceptRequest(price)
-    }
-
     return (
         <>
             <DialogHeader>
@@ -64,7 +60,7 @@ export function AcceptContractDialog({
                 <form
                     className="flex-1 space-y-2"
                     id="accept-request-form"
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit(({ price }) => acceptRequest(price))}
                 >
                     <Label htmlFor="price">Preço (R$)</Label>
                     <Input type="number" {...register("price")} />
