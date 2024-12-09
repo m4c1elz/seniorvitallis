@@ -1,18 +1,11 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import { AppTabs } from "@/components/app-tabs"
-import { Button } from "@/components/ui/button"
 import { isUserCommon } from "@/helpers/is-user-common"
 import { useAuth } from "@/providers/auth-provider"
-import { useNavigate } from "@/router"
+import { LogoutButton } from "./_partials/logout-button"
 
 export default function Options() {
-    const { logoutMutation, user } = useAuth()
-    const navigate = useNavigate()
-
-    async function handleLogout() {
-        await logoutMutation.mutateAsync()
-        navigate("/login")
-    }
+    const { user } = useAuth()
 
     return (
         <div className="flex">
@@ -39,9 +32,7 @@ export default function Options() {
                     <p className="text-foreground/50">
                         Deslogar da sessão atual.
                     </p>
-                    <Button variant="destructive" onClick={handleLogout}>
-                        Terminar Sessão
-                    </Button>
+                    <LogoutButton />
                 </section>
             </div>
         </div>
