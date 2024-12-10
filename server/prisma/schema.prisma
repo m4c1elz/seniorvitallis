@@ -43,6 +43,7 @@ model Contratacao {
   precoContratacao    Decimal?            @map("preco_contratacao") @db.Decimal(10, 2)
   dataContratacao     DateTime            @map("data_contratacao") @db.Date
   prazoContratacao    DateTime            @map("prazo_contratacao") @db.Timestamp()
+  descricao           String?             @db.VarChar(255)
   statusContratacao   Status              @map("status_contratacao")
   usuarioComum        UsuarioComum        @relation(fields: [fkUsuarioComumId], references: [idUsuarioComum], onDelete: NoAction, onUpdate: NoAction, map: "contratacao_ibfk_1")
   usuarioProfissional UsuarioProfissional @relation(fields: [fkProfissionalId], references: [idProfissional], onDelete: NoAction, onUpdate: NoAction, map: "contratacao_ibfk_2")
