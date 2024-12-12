@@ -36,7 +36,13 @@ JWT_REFRESH_SECRET='myrefreshsecret'
 VITE_API_HOST=http://localhost:8080
 ```
 
-3. Rode o script de dev em cada projeto.
+3. Na pasta `server`, rode o script do prisma para salvar o banco de dados.
+```
+pnpm prisma db push
+```
+> (use npx se não possuir pnpm)
+
+4. Rode o script de dev em cada projeto.
 ```
 pnpm -r dev
 ```
