@@ -34,6 +34,7 @@ export function AcceptContractDialog({
 
     const { mutateAsync: acceptRequest, isPending } = useMutation({
         mutationFn: async (price: number) => {
+            await new Promise(resolve => setTimeout(resolve, 1000))
             await api.patch(`/professional-user/requests/${requestId}/accept`, {
                 price,
             })

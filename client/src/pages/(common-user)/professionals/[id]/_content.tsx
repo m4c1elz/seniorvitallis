@@ -26,6 +26,7 @@ export function ProfessionalContent({
     const { mutateAsync: createRequest, isPending } = useMutation({
         mutationKey: ["create-request", { professionalId: Number(id) }],
         mutationFn: async () => {
+            await new Promise(resolve => setTimeout(resolve, 1000))
             await api.post(`/common-user/professionals/${id}/contracts`)
         },
         onSuccess: () => {

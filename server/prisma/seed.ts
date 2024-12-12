@@ -72,6 +72,7 @@ async function main() {
                 telefoneCelular: faker.phone.number({
                     style: "international",
                 }),
+                experiencia: faker.lorem.words(5),
             })),
         })
 

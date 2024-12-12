@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 import { LoginRequest } from "../types"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "@/router"
+import { LoaderCircle } from "lucide-react"
 
 export function CommonLoginForm() {
     const { commonLoginMutation } = useAuth()
@@ -43,6 +44,7 @@ export function CommonLoginForm() {
                             type="email"
                             placeholder="milaelipe.maciel@gmail.com"
                             {...register("email")}
+                            required
                         />
                     </div>
                     <div className="space-y-2.5">
@@ -51,6 +53,7 @@ export function CommonLoginForm() {
                             type="password"
                             placeholder="senha123"
                             {...register("password")}
+                            required
                         />
                     </div>
                 </form>
@@ -61,7 +64,14 @@ export function CommonLoginForm() {
                     form="login-form"
                     disabled={commonLoginMutation.isPending}
                 >
-                    Enviar
+                    {commonLoginMutation.isPending ? (
+                        <>
+                            <LoaderCircle className="animate-spin" />{" "}
+                            Enviando...
+                        </>
+                    ) : (
+                        "Enviar"
+                    )}
                 </Button>
                 <p className="text-sm">
                     Não possui conta?{" "}

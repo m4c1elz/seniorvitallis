@@ -25,6 +25,7 @@ export function RejectContractDialog({
 
     const { mutateAsync: cancelRequest, isPending } = useMutation({
         mutationFn: async () => {
+            await new Promise(resolve => setTimeout(resolve, 1000))
             await api.patch(`/professional-user/requests/${requestId}/cancel`)
             toggleDialogFn(false)
         },

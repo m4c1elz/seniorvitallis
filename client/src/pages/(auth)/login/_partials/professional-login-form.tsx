@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 import { LoginRequest } from "../types"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "@/router"
+import { LoaderCircle } from "lucide-react"
 
 export function ProfessionalLoginForm() {
     const { professionalLoginMutation } = useAuth()
@@ -63,7 +64,14 @@ export function ProfessionalLoginForm() {
                     form="login-form"
                     disabled={professionalLoginMutation.isPending}
                 >
-                    Enviar
+                    {professionalLoginMutation.isPending ? (
+                        <>
+                            <LoaderCircle className="animate-spin" />{" "}
+                            Enviando...
+                        </>
+                    ) : (
+                        "Enviar"
+                    )}
                 </Button>
                 <p className="text-sm">
                     Não possui conta?{" "}

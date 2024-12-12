@@ -26,7 +26,7 @@ model Chat {
   idChat              Int                 @id @default(autoincrement()) @map("id_chat")
   usuarioComumId      Int                 @map("usuario_comum_id")
   fkProfissionalId    Int                 @map("fk_profissional_id")
-  dataInicioChat      DateTime            @map("data_inicio_chat") @db.Date
+  dataInicioChat      DateTime            @default(now()) @map("data_inicio_chat")
   usuarioComum        UsuarioComum        @relation(fields: [usuarioComumId], references: [idUsuarioComum], onDelete: NoAction, onUpdate: NoAction, map: "chat_ibfk_1")
   usuarioProfissional UsuarioProfissional @relation(fields: [fkProfissionalId], references: [idProfissional], onDelete: NoAction, onUpdate: NoAction, map: "chat_ibfk_2")
   mensagem            Mensagem[]
@@ -85,39 +85,46 @@ model Mensagem {
 }
 
 model UsuarioComum {
-  idUsuarioComum  Int           @id @default(autoincrement()) @map("id_usuario_comum")
-  nome            String        @map("nome") @db.VarChar(255)
-  email           String        @unique(map: "email") @map("email") @db.VarChar(255)
-  telefoneCelular String?       @map("telefone_celular") @db.VarChar(15)
-  endereco        String        @map("endereco") @db.VarChar(255)
-  cpf             String        @unique(map: "cpf") @map("cpf") @db.VarChar(14)
-  senhaUsuario    String        @map("senha_usuario") @db.VarChar(255)
-  avaliacao       Avaliacao[]
-  chat            Chat[]
-  contratacao     Contratacao[]
-  denuncia        Denuncia[]
-  mensagem        Mensagem[]
+  idUsuarioComum   Int           @id @default(autoincrement()) @map("id_usuario_comum")
+  nome             String        @map("nome") @db.VarChar(255)
+  email            String        @unique(map: "email") @map("email") @db.VarChar(255)
+  telefoneCelular  String?       @map("telefone_celular") @db.VarChar(15)
+  endereco         String        @map("endereco") @db.VarChar(255)
+  cpf              String        @unique(map: "cpf") @map("cpf") @db.VarChar(14)
+  senhaUsuario     String        @map("senha_usuario") @db.VarChar(255)
+  descricao        String?       @db.VarChar(255)
+  docIdentificador String?       @db.Text
+  dataCadastro     DateTime      @default(now())
+  avaliacao        Avaliacao[]
+  chat             Chat[]
+  contratacao      Contratacao[]
+  denuncia         Denuncia[]
+  mensagem         Mensagem[]
 
   @@map("usuarios_comuns")
 }
 
 model UsuarioProfissional {
-  idProfissional  Int             @id @default(autoincrement()) @map("id_profissional")
-  nome            String          @map("nome") @db.VarChar(255)
-  email           String          @unique(map: "email") @map("email") @db.VarChar(255)
-  telefoneCelular String          @map("telefone_celular") @db.VarChar(15)
-  endereco        String          @map("endereco") @db.VarChar(255)
-  cpf             String          @unique(map: "cpf") @map("cpf") @db.VarChar(14)
-  cnpj            String          @map("cnpj") @db.VarChar(14)
-  especialidade   String          @map("especialidade") @db.VarChar(255)
-  disponibilidade Disponibilidade @map("disponibilidade")
-  descricao       String          @map("descricao") @db.VarChar(255)
-  senhaUsuario    String          @map("senha_usuario") @db.VarChar(255)
-  avaliacao       Avaliacao[]
-  chat            Chat[]
-  contratacao     Contratacao[]
-  denuncia        Denuncia[]
-  mensagem        Mensagem[]
+  idProfissional   Int             @id @default(autoincrement()) @map("id_profissional")
+  nome             String          @map("nome") @db.VarChar(255)
+  email            String          @unique(map: "email") @map("email") @db.VarChar(255)
+  telefoneCelular  String          @map("telefone_celular") @db.VarChar(15)
+  endereco         String          @map("endereco") @db.VarChar(255)
+  cpf              String          @unique(map: "cpf") @map("cpf") @db.VarChar(14)
+  cnpj             String          @map("cnpj") @db.VarChar(14)
+  especialidade    String          @map("especialidade") @db.VarChar(255)
+  disponibilidade  Disponibilidade @map("disponibilidade")
+  descricao        String          @map("descricao") @db.VarChar(255)
+  senhaUsuario     String          @map("senha_usuario") @db.VarChar(255)
+  experiencia      String          @db.VarChar(255)
+  docIdentificador String?         @db.Text
+  docPsicotec      String?         @db.Text
+  dataCadastro     DateTime        @default(now())
+  avaliacao        Avaliacao[]
+  chat             Chat[]
+  contratacao      Contratacao[]
+  denuncia         Denuncia[]
+  mensagem         Mensagem[]
 
   @@map("usuarios_profissionais")
 }

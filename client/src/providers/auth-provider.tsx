@@ -71,6 +71,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             email: string
             password: string
         }) => {
+            await new Promise(resolve => setTimeout(resolve, 1000))
             const response = await api.post(
                 "/auth/common-user/login",
                 userRequest,
@@ -81,6 +82,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setupAxiosInterceptors(api)
         },
+        onError: (error: AxiosError) => {
+            const { msg } = error.response?.data as { msg: string }
+            alert(msg)
+        },
     })
 
     const professionalLoginMutation = useMutation({
@@ -89,6 +94,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             email: string
             password: string
         }) => {
+            await new Promise(resolve => setTimeout(resolve, 1000))
             const response = await api.post(
                 "/auth/professional/login",
                 userRequest,
@@ -99,11 +105,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setupAxiosInterceptors(api)
         },
+        onError: (error: AxiosError) => {
+            const { msg } = error.response?.data as { msg: string }
+            alert(msg)
+        },
     })
 
     const logoutMutation = useMutation({
         mutationKey: ["logout"],
         mutationFn: async () => {
+            await new Promise(resolve => setTimeout(resolve, 1000))
             await api.post("/auth/logout")
             setUser(null)
             setIsAuth(false)
