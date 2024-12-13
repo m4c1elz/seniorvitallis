@@ -22,6 +22,6 @@ export default function Messages() {
         },
     })
 
-    if (isPending) return <div>Loading...</div>
+    if (isPending) return <div>Carregando...</div>
     if (chats) return <MessagesContent chats={chats} />
 }
